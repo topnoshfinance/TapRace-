@@ -38,8 +38,10 @@ contract TapRaceGame is Ownable {
     TapRaceToken public token;
     
     // Game configuration
+    // Note: ROUND_DURATION is 5 minutes to allow multiple 30-second game sessions 
+    // within each round. Players can submit multiple game scores during a round.
     uint256 public constant ROUND_DURATION = 5 minutes;
-    uint256 public constant TAP_COST = 0.03 ether; // 3 cents in ETH (adjust based on ETH price)
+    uint256 public constant TAP_COST = 0.00003 ether; // ~3 cents in ETH (adjust based on ETH price, assuming ~$3000 ETH)
     uint256 public constant MIN_TOKEN_BALANCE = 100 * 10**18; // Minimum 100 tokens to play
     
     struct Round {
@@ -97,11 +99,11 @@ contract TapRaceGame is Ownable {
         Round storage round = rounds[currentRoundId];
         
         // Update or create player score
+        // Check if player already exists to avoid duplicate entries
         if (roundScores[currentRoundId][msg.sender].player == address(0)) {
             roundPlayers[currentRoundId].push(msg.sender);
+            roundScores[currentRoundId][msg.sender].player = msg.sender;
         }
-        
-        roundScores[currentRoundId][msg.sender].player = msg.sender;
         roundScores[currentRoundId][msg.sender].score += tapCount;
         roundScores[currentRoundId][msg.sender].contribution += cost;
         roundScores[currentRoundId][msg.sender].timestamp = block.timestamp;

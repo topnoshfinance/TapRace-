@@ -97,8 +97,9 @@ TapRace-/
 2. **Join a Round**: Click "Start Game" when a round is active
 3. **Tap Away**: Tap the button as many times as possible in 30 seconds
 4. **Each Tap Costs**: 3¢ per tap (paid in ETH on Base)
-5. **Winner Takes All**: Player with the most taps wins the entire prize pool
-6. **Claim Prize**: Winners can withdraw their prize from the contract
+5. **Multiple Games**: Play multiple 30-second games within each 5-minute prize round
+6. **Winner Takes All**: Player with the most cumulative taps in the 5-minute round wins the entire prize pool
+7. **Claim Prize**: Winners can withdraw their prize from the contract
 
 ## 🖼️ Farcaster Frame Integration
 

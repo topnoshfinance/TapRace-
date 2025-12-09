@@ -54,6 +54,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Generate a player ID (in production, use wallet address or Farcaster ID)
+    // For demo purposes, we use random IDs. In production, authenticate users
+    // via wallet signatures or Farcaster Frame validation to prevent abuse.
     const playerId = `player-${Math.random().toString(36).substring(7)}`;
     
     // Calculate contribution to prize pool (3 cents per tap)

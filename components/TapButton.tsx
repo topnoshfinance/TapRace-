@@ -11,6 +11,7 @@ export default function TapButton({ onTap }: TapButtonProps) {
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([]);
 
   const handleTap = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault(); // Prevent default to avoid double-firing
     onTap();
     
     // Visual feedback
@@ -34,8 +35,7 @@ export default function TapButton({ onTap }: TapButtonProps) {
   return (
     <div className="flex justify-center items-center py-12">
       <button
-        onClick={handleTap}
-        onTouchStart={handleTap}
+        onPointerDown={handleTap}
         className={`
           tap-button relative overflow-hidden
           w-64 h-64 rounded-full 

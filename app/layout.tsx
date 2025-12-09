@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'TapRace - Competitive Tapping on Base',
     description: 'Race to tap the most in 30 seconds! Winner takes the prize pool.',
-    images: ['/og-image.png'],
+    images: ['/og-image.svg'],
   },
   other: {
     'fc:frame': 'vNext',

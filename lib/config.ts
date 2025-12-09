@@ -1,9 +1,9 @@
 import { base } from 'viem/chains';
 
 export const GAME_CONFIG = {
-  ROUND_DURATION: 30, // seconds
-  TAP_COST: 0.03, // USD
-  ROUND_INTERVAL: 5 * 60 * 1000, // 5 minutes in milliseconds
+  ROUND_DURATION: 30, // Individual game session duration in seconds
+  TAP_COST: 0.03, // USD per tap
+  ROUND_INTERVAL: 5 * 60 * 1000, // Prize round interval in milliseconds (5 minutes)
   MIN_TOKEN_BALANCE: 100, // Minimum tokens required
 };
 
