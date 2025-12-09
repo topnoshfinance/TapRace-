@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     // const { isValid } = await validateFrameSignature(body);
     
     const buttonIndex = untrustedData?.buttonIndex || 1;
-    const fid = untrustedData?.fid;
+    // const fid = untrustedData?.fid; // For future use with user identification
 
     // Generate game start response
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';

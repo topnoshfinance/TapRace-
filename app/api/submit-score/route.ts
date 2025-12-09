@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 // In-memory storage for demo purposes
 // In production, use a database like PostgreSQL or MongoDB
-let gameRounds: {
+const gameRounds: {
   roundId: string;
   startTime: number;
   endTime: number;
