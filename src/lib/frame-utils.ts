@@ -2,16 +2,21 @@ export function isInFarcasterFrame(): boolean {
   if (typeof window === 'undefined') return false
   
   // Check for Farcaster frame context
-  const ancestorOrigin = window.location.ancestorOrigins?.[0];
-  const isWarpcastOrigin = ancestorOrigin ? 
-    new URL(ancestorOrigin).hostname === 'warpcast.com' || 
-    new URL(ancestorOrigin).hostname.endsWith('.warpcast.com') : false;
+  try {
+    const ancestorOrigin = window.location.ancestorOrigins?.[0];
+    if (ancestorOrigin) {
+      const url = new URL(ancestorOrigin);
+      const isWarpcastOrigin = url.hostname === 'warpcast.com' || url.hostname.endsWith('.warpcast.com');
+      if (isWarpcastOrigin) return true;
+    }
+  } catch {
+    // Invalid URL, continue to other checks
+  }
   
-  return (
-    window.parent !== window.self || // Running in iframe
-    /farcaster/i.test(navigator.userAgent) ||
-    isWarpcastOrigin
-  )
+  // Check for Farcaster in user agent
+  if (/farcaster/i.test(navigator.userAgent)) return true;
+  
+  return false;
 }
 
 export function getFarcasterFrameContext() {

@@ -25,7 +25,11 @@ export default function Home() {
   // Auto-connect in Farcaster frames
   useEffect(() => {
     if (isInFarcasterFrame() && !isConnected) {
-      const coinbaseConnector = connectors.find(c => c.id === 'coinbaseWalletSDK');
+      // Try to find Coinbase wallet connector by name or type
+      const coinbaseConnector = connectors.find(c => 
+        c.id.toLowerCase().includes('coinbase') || 
+        c.name.toLowerCase().includes('coinbase')
+      );
       if (coinbaseConnector) {
         connect({ connector: coinbaseConnector });
       }
