@@ -15,14 +15,15 @@ export async function POST(request: NextRequest) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
     if (buttonIndex === 1) {
-      // Start game button pressed
+      // Start game button pressed - redirect to app with wallet connection
       return NextResponse.json({
         version: 'vNext',
         image: `${baseUrl}/api/frame/image?state=playing`,
         buttons: [
           {
-            label: 'Tap! (1 $TAP)',
-            action: 'post',
+            label: 'Connect Wallet & Play',
+            action: 'link',
+            target: `${baseUrl}`,
           },
           {
             label: 'View Results',

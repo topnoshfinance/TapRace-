@@ -125,6 +125,17 @@ npx hardhat run scripts/deploy.js --network base
 
 ## Step 2: Deploy Frontend to Vercel
 
+### WalletConnect Setup
+Before deploying, you need to set up WalletConnect:
+
+1. Go to [WalletConnect Cloud](https://cloud.walletconnect.com/)
+2. Sign up or log in
+3. Create a new project
+4. Copy your **Project ID**
+5. Keep this ID for the next step
+
+### Deploy to Vercel
+
 1. Push your code to GitHub:
 ```bash
 git add .
@@ -141,6 +152,7 @@ git push origin main
    - `NEXT_PUBLIC_TOKEN_ADDRESS`: Token contract address from Step 1
    - `NEXT_PUBLIC_BASE_RPC_URL`: https://mainnet.base.org
    - `NEXT_PUBLIC_CHAIN_ID`: 8453
+   - `NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID`: Your WalletConnect Project ID from above
 
 6. Click "Deploy"
 
