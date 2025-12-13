@@ -14,6 +14,14 @@ TapRace is a social race mini app for Farcaster and Base where players compete t
 - **Real-time Leaderboard**: Track your ranking and see top players
 - **5-Minute Rounds**: New rounds start automatically
 
+## 🔗 Supported Wallets
+
+- ✅ **Coinbase Smart Wallet** (recommended for Base app users)
+- ✅ **Farcaster Wallet** (via WalletConnect)
+- ✅ **MetaMask**
+- ✅ **Rainbow**
+- ✅ **Any WalletConnect-compatible wallet**
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -21,6 +29,7 @@ TapRace is a social race mini app for Farcaster and Base where players compete t
 - Node.js 18+ and npm
 - A Base network wallet (for deployment)
 - Farcaster account (for testing frames)
+- WalletConnect Project ID (get from https://cloud.walletconnect.com/)
 
 ### Installation
 
@@ -46,6 +55,7 @@ NEXT_PUBLIC_BASE_URL=http://localhost:3000
 NEXT_PUBLIC_CONTRACT_ADDRESS=your_contract_address
 NEXT_PUBLIC_TOKEN_ADDRESS=your_token_address
 NEXT_PUBLIC_BASE_RPC_URL=https://mainnet.base.org
+NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_walletconnect_project_id
 ```
 
 5. Run the development server:

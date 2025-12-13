@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { Web3Provider } from '@/src/components/Web3Provider';
 
 export const metadata: Metadata = {
   title: 'TapRace - Competitive Tapping on Base',
@@ -25,7 +26,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Web3Provider>{children}</Web3Provider>
+      </body>
     </html>
   );
 }

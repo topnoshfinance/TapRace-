@@ -1,9 +1,12 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useAccount, useConnect } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import TapButton from '@/components/TapButton';
 import GameStats from '@/components/GameStats';
 import Leaderboard from '@/components/Leaderboard';
+import { isInFarcasterFrame } from '@/src/lib/frame-utils';
 
 export default function Home() {
   const [gameState, setGameState] = useState<'idle' | 'playing' | 'finished'>('idle');
@@ -12,9 +15,22 @@ export default function Home() {
   const [totalPool, setTotalPool] = useState(0);
   const [hasToken, setHasToken] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  
+  const { isConnected, address } = useAccount();
+  const { connect, connectors } = useConnect();
 
   const TAP_COST = 1; // 1 TAP token per tap
   const GAME_DURATION = 30; // 30 seconds
+
+  // Auto-connect in Farcaster frames
+  useEffect(() => {
+    if (isInFarcasterFrame() && !isConnected) {
+      const coinbaseConnector = connectors.find(c => c.id === 'coinbaseWalletSDK');
+      if (coinbaseConnector) {
+        connect({ connector: coinbaseConnector });
+      }
+    }
+  }, [isConnected, connect, connectors]);
 
   useEffect(() => {
     // Check if user has TapRace token (simplified for demo)
@@ -25,11 +41,15 @@ export default function Home() {
     // 4. Then call gameContract.submitTaps() which will transfer tokens on-chain
     const checkTokenOwnership = async () => {
       // In production, this would check actual token balance
-      // For now, we'll simulate token ownership
-      setHasToken(true);
+      // For now, we'll simulate token ownership if wallet is connected
+      if (isConnected && address) {
+        setHasToken(true);
+      } else {
+        setHasToken(false);
+      }
     };
     checkTokenOwnership();
-  }, []);
+  }, [isConnected, address]);
 
   const startGame = () => {
     if (!hasToken) {
@@ -98,6 +118,9 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-base-blue to-farcaster-purple p-4">
       <div className="max-w-4xl mx-auto">
         <header className="text-center py-8">
+          <div className="flex justify-end mb-4">
+            <ConnectButton />
+          </div>
           <h1 className="text-5xl font-bold text-white mb-2">
             ⚡ TapRace ⚡
           </h1>
@@ -120,7 +143,14 @@ export default function Home() {
                 Tap as many times as you can in 30 seconds!<br />
                 Each tap costs 1 $TAP. Winner takes the entire pool! 🏆
               </p>
-              {hasToken ? (
+              {!isConnected ? (
+                <div className="bg-blue-100 border-2 border-blue-400 rounded-xl p-6">
+                  <p className="text-blue-800 font-semibold mb-4">
+                    🔗 Connect your wallet to start playing!
+                  </p>
+                  <ConnectButton />
+                </div>
+              ) : hasToken ? (
                 <button
                   onClick={startGame}
                   className="bg-gradient-to-r from-base-blue to-farcaster-purple text-white px-12 py-4 rounded-full text-xl font-bold hover:shadow-lg transform hover:scale-105 transition-all"
