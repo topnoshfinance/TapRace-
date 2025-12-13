@@ -5,8 +5,9 @@
 1. Node.js 18+ installed
 2. npm or yarn package manager
 3. Base network wallet with ETH for gas fees
-4. Vercel account (for hosting)
-5. Farcaster account (for testing)
+4. TAP tokens for testing gameplay
+5. Vercel account (for hosting)
+6. Farcaster account (for testing)
 
 ## Step 1: Deploy Smart Contracts
 
@@ -174,7 +175,7 @@ https://your-deployment-url.vercel.app
 4. Enter contract details and source code
 5. Or use Foundry/Hardhat verification commands
 
-## Step 6: Initial Token Distribution
+## Step 6: Initial Token Distribution and Approvals
 
 1. Mint some tokens to test wallets:
 ```bash
@@ -183,7 +184,14 @@ cast send <TOKEN_ADDRESS> "mint(address,uint256)" <RECIPIENT> <AMOUNT> \
   --private-key $PRIVATE_KEY
 ```
 
-2. Create a liquidity pool (optional):
+2. Approve the GameContract to spend TAP tokens:
+```bash
+cast send <TOKEN_ADDRESS> "approve(address,uint256)" <GAME_CONTRACT_ADDRESS> <AMOUNT> \
+  --rpc-url https://mainnet.base.org \
+  --private-key $PRIVATE_KEY
+```
+
+3. Create a liquidity pool (optional):
    - Use Uniswap or other DEX on Base
    - Pair with ETH or USDC
    - Add initial liquidity
@@ -212,10 +220,11 @@ cast send <TOKEN_ADDRESS> "mint(address,uint256)" <RECIPIENT> <AMOUNT> \
 ## Maintenance
 
 - Regularly check contract balance
-- Monitor gas prices and adjust TAP_COST if needed
+- Monitor TAP token price and market conditions
 - Keep dependencies updated
 - Back up database (when implemented)
 - Monitor for abuse or exploits
+- Ensure sufficient TAP token liquidity
 
 ## Troubleshooting
 
@@ -233,8 +242,9 @@ cast send <TOKEN_ADDRESS> "mint(address,uint256)" <RECIPIENT> <AMOUNT> \
 ### Transactions failing
 - Check gas limits
 - Verify contract addresses
-- Ensure users have enough ETH and tokens
+- Ensure users have enough TAP tokens and have approved token spending
 - Check Base network congestion
+- Verify token approval amounts
 
 ## Next Steps
 

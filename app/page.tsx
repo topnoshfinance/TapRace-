@@ -13,7 +13,7 @@ export default function Home() {
   const [hasToken, setHasToken] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const TAP_COST = 0.03; // 3 cents per tap in USD
+  const TAP_COST = 1; // 1 TAP token per tap
   const GAME_DURATION = 30; // 30 seconds
 
   useEffect(() => {
@@ -110,7 +110,7 @@ export default function Home() {
             <div className="text-center py-8">
               <p className="text-gray-600 mb-6 text-lg">
                 Tap as many times as you can in 30 seconds!<br />
-                Each tap costs 3¢. Winner takes the entire pool! 🏆
+                Each tap costs 1 $TAP. Winner takes the entire pool! 🏆
               </p>
               {hasToken ? (
                 <button
@@ -148,7 +148,7 @@ export default function Home() {
                 Your score: <span className="font-bold text-base-blue">{tapCount} taps</span>
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                Pool contribution: <span className="font-bold">${(tapCount * TAP_COST).toFixed(2)}</span>
+                Pool contribution: <span className="font-bold">{tapCount * TAP_COST} $TAP</span>
               </p>
               <button
                 onClick={resetGame}

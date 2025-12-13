@@ -41,7 +41,7 @@ contract TapRaceGame is Ownable {
     // Note: ROUND_DURATION is 5 minutes to allow multiple 30-second game sessions 
     // within each round. Players can submit multiple game scores during a round.
     uint256 public constant ROUND_DURATION = 5 minutes;
-    uint256 public constant TAP_COST = 0.00003 ether; // ~3 cents in ETH (adjust based on ETH price, assuming ~$3000 ETH)
+    uint256 public constant TAP_COST = 1 * 10**18; // 1 TAP token per tap
     uint256 public constant MIN_TOKEN_BALANCE = 100 * 10**18; // Minimum 100 tokens to play
     
     struct Round {
@@ -89,12 +89,14 @@ contract TapRaceGame is Ownable {
     /**
      * @dev Submit taps for current round
      */
-    function submitTaps(uint256 tapCount) external payable hasTokens {
+    function submitTaps(uint256 tapCount) external hasTokens {
         require(tapCount > 0, "Tap count must be positive");
         require(block.timestamp < rounds[currentRoundId].endTime, "Round has ended");
         
         uint256 cost = tapCount * TAP_COST;
-        require(msg.value >= cost, "Insufficient payment");
+        
+        // Transfer TAP tokens from player to contract
+        require(token.transferFrom(msg.sender, address(this), cost), "Token transfer failed");
         
         Round storage round = rounds[currentRoundId];
         
@@ -111,11 +113,6 @@ contract TapRaceGame is Ownable {
         round.prizePool += cost;
         
         emit ScoreSubmitted(currentRoundId, msg.sender, tapCount, cost);
-        
-        // Refund excess payment
-        if (msg.value > cost) {
-            payable(msg.sender).transfer(msg.value - cost);
-        }
     }
     
     /**
@@ -168,7 +165,7 @@ contract TapRaceGame is Ownable {
         uint256 prize = round.prizePool;
         round.prizePool = 0;
         
-        payable(msg.sender).transfer(prize);
+        require(token.transfer(msg.sender, prize), "Token transfer failed");
         
         emit PrizeWithdrawn(roundId, msg.sender, prize);
     }
