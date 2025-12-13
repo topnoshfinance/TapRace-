@@ -1,0 +1,223 @@
+[
+  {
+    "inputs": [{"internalType": "address","name": "_tokenAddress","type": "address"}],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "ReentrancyGuardReentrantCall",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true,"internalType": "uint256","name": "roundId","type": "uint256"},
+      {"indexed": true,"internalType": "address","name": "winner","type": "address"},
+      {"indexed": false,"internalType": "uint256","name": "prize","type": "uint256"}
+    ],
+    "name": "RoundEnded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true,"internalType": "uint256","name": "roundId","type": "uint256"},
+      {"indexed": true,"internalType": "address","name": "winner","type": "address"},
+      {"indexed": false,"internalType": "uint256","name": "prize","type": "uint256"}
+    ],
+    "name": "RoundFinalized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true,"internalType": "uint256","name": "roundId","type": "uint256"},
+      {"indexed": false,"internalType": "uint256","name": "startTime","type": "uint256"},
+      {"indexed": false,"internalType": "uint256","name": "endTime","type": "uint256"}
+    ],
+    "name": "RoundStarted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {"indexed": true,"internalType": "uint256","name": "roundId","type": "uint256"},
+      {"indexed": true,"internalType": "address","name": "player","type": "address"},
+      {"indexed": false,"internalType": "uint256","name": "tapCount","type": "uint256"},
+      {"indexed": false,"internalType": "uint256","name": "totalSpent","type": "uint256"}
+    ],
+    "name": "TapRecorded",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "MIN_TAP_INTERVAL",
+    "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ROUND_DURATION",
+    "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "TAP_COST",
+    "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "currentRoundId",
+    "outputs": [{"internalType": "uint256","name": "","type": "uint256"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "emergencyWithdraw",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "endRound",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256","name": "roundId","type": "uint256"}],
+    "name": "finalizeRound",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCurrentRound",
+    "outputs": [
+      {"internalType": "uint256","name": "roundId","type": "uint256"},
+      {"internalType": "uint256","name": "startTime","type": "uint256"},
+      {"internalType": "uint256","name": "endTime","type": "uint256"},
+      {"internalType": "uint256","name": "totalPot","type": "uint256"},
+      {"internalType": "bool","name": "active","type": "bool"}
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "uint256","name": "roundId","type": "uint256"},
+      {"internalType": "address","name": "player","type": "address"}
+    ],
+    "name": "getPlayerRoundData",
+    "outputs": [
+      {"internalType": "uint256","name": "tapCount","type": "uint256"},
+      {"internalType": "uint256","name": "lastTapTime","type": "uint256"},
+      {"internalType": "uint256","name": "totalSpent","type": "uint256"}
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256","name": "roundId","type": "uint256"}],
+    "name": "getRoundPlayers",
+    "outputs": [{"internalType": "address[]","name": "","type": "address[]"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{"internalType": "address","name": "","type": "address"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "uint256","name": "","type": "uint256"},
+      {"internalType": "address","name": "","type": "address"}
+    ],
+    "name": "playerRoundData",
+    "outputs": [
+      {"internalType": "uint256","name": "tapCount","type": "uint256"},
+      {"internalType": "uint256","name": "lastTapTime","type": "uint256"},
+      {"internalType": "uint256","name": "totalSpent","type": "uint256"}
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "roundActive",
+    "outputs": [{"internalType": "bool","name": "","type": "bool"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {"internalType": "uint256","name": "","type": "uint256"},
+      {"internalType": "uint256","name": "","type": "uint256"}
+    ],
+    "name": "roundPlayers",
+    "outputs": [{"internalType": "address","name": "","type": "address"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "uint256","name": "","type": "uint256"}],
+    "name": "rounds",
+    "outputs": [
+      {"internalType": "uint256","name": "roundId","type": "uint256"},
+      {"internalType": "uint256","name": "startTime","type": "uint256"},
+      {"internalType": "uint256","name": "endTime","type": "uint256"},
+      {"internalType": "address","name": "winner","type": "address"},
+      {"internalType": "uint256","name": "totalPot","type": "uint256"},
+      {"internalType": "bool","name": "finalized","type": "bool"}
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "startRound",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tap",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "tapRaceToken",
+    "outputs": [{"internalType": "contract IERC20","name": "","type": "address"}],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{"internalType": "address","name": "newOwner","type": "address"}],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
