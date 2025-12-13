@@ -1,7 +1,7 @@
 # TapRace Implementation Summary
 
 ## Project Overview
-TapRace is a social race mini app built for Farcaster and Base network where players compete to tap the screen as many times as possible in 30-second game sessions. Each tap costs 3¢ (paid in ETH), and the player with the most taps during each 5-minute prize round wins the entire prize pool.
+TapRace is a social race mini app built for Farcaster and Base network where players compete to tap the screen as many times as possible in 30-second game sessions. Each tap costs 1 $TAP token, and the player with the most taps during each 5-minute prize round wins the entire prize pool.
 
 ## What Was Implemented
 
@@ -33,8 +33,8 @@ TapRace is a social race mini app built for Farcaster and Base network where pla
 - **TapRaceGame**: Main game contract
   - Token-gated (requires 100 tokens minimum)
   - 5-minute prize rounds
-  - Tap cost: ~0.00003 ETH (~3¢ at $3000 ETH)
-  - Winner-takes-all prize distribution
+  - Tap cost: 1 TAP token per tap
+  - Winner-takes-all prize distribution (in TAP tokens)
   - Gas-optimized player tracking
   - Secure prize withdrawal mechanism
 
@@ -51,15 +51,16 @@ TapRace is a social race mini app built for Farcaster and Base network where pla
 ### Game Mechanics
 - **30-Second Games**: Individual game sessions last 30 seconds
 - **5-Minute Rounds**: Prize rounds last 5 minutes (multiple games per round)
-- **3¢ Per Tap**: Affordable participation cost
+- **1 TAP Per Tap**: Simple token-based pricing model
 - **Cumulative Scoring**: All taps during a round count toward winning
-- **Winner Takes All**: Highest scorer wins entire prize pool
+- **Winner Takes All**: Highest scorer wins entire TAP token prize pool
 
 ### Token Economics
 - **Entry Requirement**: 100 TapRace tokens minimum
 - **Transfer Volume**: Encourages token circulation
 - **Reputation Building**: Token holders gain status
-- **Prize Pool**: Accumulates from all players' tap fees
+- **Prize Pool**: Accumulates TAP tokens from all players' tap fees
+- **Token Approval**: Players must approve GameContract to spend TAP tokens
 
 ### User Experience
 - **One-Tap Gameplay**: Simple, intuitive interaction
@@ -101,10 +102,11 @@ Requires minimum 100 TapRace tokens to play. This:
 - Encourages token circulation
 
 ### Pricing Strategy
-TAP_COST set to ~0.00003 ETH to achieve 3¢ per tap assuming ETH = $3000.
-- Adjust based on current ETH price
-- Consider implementing oracle-based dynamic pricing
-- Base network ensures low gas fees
+TAP_COST set to 1 TAP token (1 * 10^18 in wei) per tap.
+- Simple 1:1 ratio (1 tap = 1 $TAP)
+- Flexible pricing based on token market value
+- Lower barrier to entry compared to ETH-based pricing
+- Aligns with web3 token economy model
 
 ## Security Considerations
 
@@ -119,10 +121,11 @@ TAP_COST set to ~0.00003 ETH to achieve 3¢ per tap assuming ETH = $3000.
 ### What Needs Production Hardening
 ⚠️ Frame signature verification (currently commented out)
 ⚠️ Wallet-based user authentication (demo uses random IDs)
+⚠️ **Token approval flow implementation in frontend** (critical for TAP token payments)
+⚠️ **Smart contract integration** (frontend needs to call submitTaps() on-chain)
 ⚠️ Rate limiting on API endpoints
 ⚠️ Smart contract audit recommended
 ⚠️ Database persistence required
-⚠️ Oracle for dynamic ETH pricing
 
 ## Testing Status
 
@@ -214,12 +217,13 @@ TapRace-/
 
 ## Important Notes
 
-### TAP_COST Adjustment
-The smart contract sets TAP_COST to 0.00003 ETH based on ETH = $3000.
-If ETH price changes significantly:
-- Adjust TAP_COST in contract
-- Or implement oracle-based dynamic pricing
-- Or consider using stablecoin payments
+### TAP Token System
+The game now uses a token-based payment system:
+- Each tap costs 1 TAP token (not ETH)
+- Players must approve the GameContract to spend their TAP tokens
+- Prize pool accumulates in TAP tokens
+- Winners receive TAP tokens
+- Future configuration: Can be replaced with any ERC-20 token (e.g., Clanker-launched $TAP)
 
 ### Player Authentication
 Demo uses random player IDs. For production:

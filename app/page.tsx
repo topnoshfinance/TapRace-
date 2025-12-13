@@ -13,11 +13,16 @@ export default function Home() {
   const [hasToken, setHasToken] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const TAP_COST = 0.03; // 3 cents per tap in USD
+  const TAP_COST = 1; // 1 TAP token per tap
   const GAME_DURATION = 30; // 30 seconds
 
   useEffect(() => {
     // Check if user has TapRace token (simplified for demo)
+    // In production, implement the following:
+    // 1. Check TAP token balance via token.balanceOf(userAddress)
+    // 2. Check token approval via token.allowance(userAddress, gameContractAddress)
+    // 3. If balance sufficient but approval insufficient, prompt user to approve
+    // 4. Then call gameContract.submitTaps() which will transfer tokens on-chain
     const checkTokenOwnership = async () => {
       // In production, this would check actual token balance
       // For now, we'll simulate token ownership
@@ -66,6 +71,9 @@ export default function Home() {
 
   const submitScore = async (score: number) => {
     try {
+      // In production, this should call the smart contract's submitTaps() function
+      // which will transfer TAP tokens and record the score on-chain
+      // For demo purposes, we're submitting to the API route only
       const response = await fetch('/api/submit-score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -110,7 +118,7 @@ export default function Home() {
             <div className="text-center py-8">
               <p className="text-gray-600 mb-6 text-lg">
                 Tap as many times as you can in 30 seconds!<br />
-                Each tap costs 3¢. Winner takes the entire pool! 🏆
+                Each tap costs 1 $TAP. Winner takes the entire pool! 🏆
               </p>
               {hasToken ? (
                 <button
@@ -148,7 +156,7 @@ export default function Home() {
                 Your score: <span className="font-bold text-base-blue">{tapCount} taps</span>
               </p>
               <p className="text-lg text-gray-600 mb-6">
-                Pool contribution: <span className="font-bold">${(tapCount * TAP_COST).toFixed(2)}</span>
+                Pool contribution: <span className="font-bold">{tapCount * TAP_COST} $TAP</span>
               </p>
               <button
                 onClick={resetGame}

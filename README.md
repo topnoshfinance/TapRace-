@@ -1,6 +1,8 @@
 # ⚡ TapRace - Competitive Tapping on Base
 
-TapRace is a social race mini app for Farcaster and Base where players compete to tap the screen as many times as possible in 30 seconds. Each tap costs 3¢, and the winner takes the entire prize pool!
+TapRace is a social race mini app for Farcaster and Base where players compete to tap the screen as many times as possible in 30 seconds. Each tap costs 1 $TAP token, and the winner takes the entire prize pool!
+
+> **Note**: The smart contracts have been updated to use TAP token payments. For full functionality, wallet integration is required to handle token approvals and on-chain transactions. The current frontend is a demo version.
 
 ## 🎮 Features
 
@@ -89,14 +91,14 @@ TapRace-/
 - Tracks player scores and contributions
 - Handles winner determination and prize distribution
 - Round duration: 5 minutes
-- Tap cost: 0.03 ETH (adjustable based on ETH price)
+- Tap cost: 1 TAP token per tap
 
 ## 🎯 How to Play
 
 1. **Get Tokens**: Acquire TapRace tokens (minimum 100 tokens required)
 2. **Join a Round**: Click "Start Game" when a round is active
 3. **Tap Away**: Tap the button as many times as possible in 30 seconds
-4. **Each Tap Costs**: 3¢ per tap (paid in ETH on Base)
+4. **Each Tap Costs**: 1 $TAP token per tap
 5. **Multiple Games**: Play multiple 30-second games within each 5-minute prize round
 6. **Winner Takes All**: Player with the most cumulative taps in the 5-minute round wins the entire prize pool
 7. **Claim Prize**: Winners can withdraw their prize from the contract
@@ -147,8 +149,9 @@ forge create --rpc-url $BASE_RPC_URL --private-key $PRIVATE_KEY contracts/TapRac
 - Smart contracts should be audited before mainnet deployment
 - Rate limiting on API endpoints to prevent abuse
 - Frame signature verification for Farcaster integration
-- Proper handling of ETH transfers and prize distributions
+- Proper handling of TAP token transfers and prize distributions
 - Token balance checks before allowing participation
+- Token approval checks for spending TAP tokens
 
 ## 🚀 Deployment
 

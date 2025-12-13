@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
                 Tap to Play!
               </div>
               <div style={{ fontSize: 32, color: 'white', opacity: 0.8, marginTop: 20 }}>
-                Each tap: 3¢ • Winner takes all! 🏆
+                Each tap: 1 $TAP • Winner takes all! 🏆
               </div>
             </div>
           </div>

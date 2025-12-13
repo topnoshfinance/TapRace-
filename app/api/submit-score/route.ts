@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
     // via wallet signatures or Farcaster Frame validation to prevent abuse.
     const playerId = `player-${Math.random().toString(36).substring(7)}`;
     
-    // Calculate contribution to prize pool (3 cents per tap)
-    const contribution = score * 0.03;
+    // Calculate contribution to prize pool (1 TAP token per tap)
+    const contribution = score * 1;
     currentRound.prizePool += contribution;
 
     // Add score to current round
@@ -73,8 +73,8 @@ export async function POST(request: NextRequest) {
       success: true,
       roundId: currentRound.roundId,
       score,
-      contribution: contribution.toFixed(2),
-      currentPool: currentRound.prizePool.toFixed(2),
+      contribution: contribution.toString(),
+      currentPool: currentRound.prizePool.toString(),
       timeLeft: Math.max(0, currentRound.endTime - Date.now()),
     });
   } catch (error) {

@@ -25,7 +25,7 @@ export default function GameStats({ tapCount, timeLeft, totalPool, gameState }: 
       <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl">
         <p className="text-sm text-gray-600 font-semibold mb-1">POOL</p>
         <p className="text-4xl font-bold text-green-600">
-          ${totalPool.toFixed(2)}
+          {totalPool} $TAP
         </p>
       </div>
     </div>

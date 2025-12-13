@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         image: `${baseUrl}/api/frame/image?state=playing`,
         buttons: [
           {
-            label: 'Tap! (3¢)',
+            label: 'Tap! (1 $TAP)',
             action: 'post',
           },
           {
