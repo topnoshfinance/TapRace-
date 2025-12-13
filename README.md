@@ -2,6 +2,8 @@
 
 TapRace is a social race mini app for Farcaster and Base where players compete to tap the screen as many times as possible in 30 seconds. Each tap costs 1 $TAP token, and the winner takes the entire prize pool!
 
+> **Note**: The smart contracts have been updated to use TAP token payments. For full functionality, wallet integration is required to handle token approvals and on-chain transactions. The current frontend is a demo version.
+
 ## 🎮 Features
 
 - **Competitive Tapping**: Race against others to tap the most in 30 seconds

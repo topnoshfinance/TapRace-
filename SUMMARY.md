@@ -121,10 +121,11 @@ TAP_COST set to 1 TAP token (1 * 10^18 in wei) per tap.
 ### What Needs Production Hardening
 ⚠️ Frame signature verification (currently commented out)
 ⚠️ Wallet-based user authentication (demo uses random IDs)
+⚠️ **Token approval flow implementation in frontend** (critical for TAP token payments)
+⚠️ **Smart contract integration** (frontend needs to call submitTaps() on-chain)
 ⚠️ Rate limiting on API endpoints
 ⚠️ Smart contract audit recommended
 ⚠️ Database persistence required
-⚠️ Token approval flow implementation in frontend
 
 ## Testing Status
 

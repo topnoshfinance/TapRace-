@@ -18,6 +18,11 @@ export default function Home() {
 
   useEffect(() => {
     // Check if user has TapRace token (simplified for demo)
+    // In production, implement the following:
+    // 1. Check TAP token balance via token.balanceOf(userAddress)
+    // 2. Check token approval via token.allowance(userAddress, gameContractAddress)
+    // 3. If balance sufficient but approval insufficient, prompt user to approve
+    // 4. Then call gameContract.submitTaps() which will transfer tokens on-chain
     const checkTokenOwnership = async () => {
       // In production, this would check actual token balance
       // For now, we'll simulate token ownership
@@ -66,6 +71,9 @@ export default function Home() {
 
   const submitScore = async (score: number) => {
     try {
+      // In production, this should call the smart contract's submitTaps() function
+      // which will transfer TAP tokens and record the score on-chain
+      // For demo purposes, we're submitting to the API route only
       const response = await fetch('/api/submit-score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -88,6 +88,9 @@ contract TapRaceGame is Ownable {
     
     /**
      * @dev Submit taps for current round
+     * @param tapCount Number of taps to submit
+     * Note: Caller must have approved this contract to spend at least (tapCount * TAP_COST) tokens
+     * before calling this function, or the transferFrom will fail with "ERC20: insufficient allowance"
      */
     function submitTaps(uint256 tapCount) external hasTokens {
         require(tapCount > 0, "Tap count must be positive");
