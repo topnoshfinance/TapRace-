@@ -5,7 +5,7 @@ import { createPublicClient, createWalletClient, http } from 'viem';
 import { baseSepolia } from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
 import * as dotenv from 'dotenv';
-import gameAbi from '../../lib/contracts/GameContract.json' assert { type: 'json' };
+import gameAbi from '../../lib/contracts/GameContract.json' with { type: 'json' };
 
 dotenv.config();
 

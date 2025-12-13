@@ -6,6 +6,9 @@ import { useTokenAllowance, useTokenApproval } from '@/hooks/useToken';
 import { CONTRACTS, TAP_COST } from '@/lib/web3/constants';
 import { parseEther } from 'viem';
 
+// Approval amount for tap transactions
+const APPROVAL_AMOUNT = '1000'; // 1000 TAPRACE tokens
+
 interface TapButtonProps {
   onTap?: () => void;
   disabled?: boolean;
@@ -47,7 +50,7 @@ export function TapButton({ onTap, disabled }: TapButtonProps) {
   const handleApprove = async () => {
     try {
       // Approve a large amount so user doesn't need to approve every time
-      await approve(CONTRACTS.GAME_ADDRESS, '1000');
+      await approve(CONTRACTS.GAME_ADDRESS, APPROVAL_AMOUNT);
     } catch (error) {
       console.error('Approval failed:', error);
     }

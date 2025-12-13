@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRoundPlayers, usePlayerRoundData } from '@/hooks/useGame';
 import { formatEther } from 'viem';
 
 interface LeaderboardProps {
@@ -10,40 +9,47 @@ interface LeaderboardProps {
 
 interface PlayerScore {
   address: string;
-  tapCount: bigint;
-  totalSpent: bigint;
+  tapCount: string;
+  totalSpent: string;
 }
 
 export function Leaderboard({ roundId }: LeaderboardProps) {
-  const { players, refetch } = useRoundPlayers(roundId);
   const [leaderboard, setLeaderboard] = useState<PlayerScore[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchLeaderboard = async () => {
-      if (!players || players.length === 0) return;
+      if (roundId === BigInt(0)) return;
 
-      const scores: PlayerScore[] = [];
-      for (const player of players) {
-        // Note: In production, this should be done via API to avoid rate limiting
-        const data = await fetch(`/api/player-data?roundId=${roundId}&address=${player}`);
-        const playerData = await data.json();
-        scores.push({
-          address: player,
-          tapCount: BigInt(playerData.tapCount || 0),
-          totalSpent: BigInt(playerData.totalSpent || 0),
-        });
+      setIsLoading(true);
+      try {
+        const response = await fetch(`/api/leaderboard?roundId=${roundId}`);
+        const data = await response.json();
+        
+        if (data.leaderboard) {
+          setLeaderboard(data.leaderboard);
+        }
+      } catch (error) {
+        console.error('Failed to fetch leaderboard:', error);
+      } finally {
+        setIsLoading(false);
       }
-
-      // Sort by tap count descending
-      scores.sort((a, b) => Number(b.tapCount - a.tapCount));
-      setLeaderboard(scores);
     };
 
     fetchLeaderboard();
     const interval = setInterval(fetchLeaderboard, 2000); // Refresh every 2 seconds
 
     return () => clearInterval(interval);
-  }, [players, roundId]);
+  }, [roundId]);
+
+  if (isLoading && leaderboard.length === 0) {
+    return (
+      <div className="bg-gray-900 rounded-lg p-6">
+        <h2 className="text-2xl font-bold mb-4 text-white">Leaderboard</h2>
+        <p className="text-gray-400">Loading...</p>
+      </div>
+    );
+  }
 
   if (leaderboard.length === 0) {
     return (
@@ -75,10 +81,10 @@ export function Leaderboard({ roundId }: LeaderboardProps) {
             </div>
             <div className="text-right">
               <div className="text-xl font-bold text-white">
-                {player.tapCount.toString()} taps
+                {player.tapCount} taps
               </div>
               <div className="text-xs text-gray-400">
-                {formatEther(player.totalSpent)} TAPRACE
+                {formatEther(BigInt(player.totalSpent))} TAPRACE
               </div>
             </div>
           </div>
