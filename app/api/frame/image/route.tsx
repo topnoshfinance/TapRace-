@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
         ),
         {
           width: 1200,
-          height: 630,
+          height: 1200,
         }
       );
     } else if (state === 'results') {
@@ -83,7 +83,7 @@ export async function GET(request: NextRequest) {
         ),
         {
           width: 1200,
-          height: 630,
+          height: 1200,
         }
       );
     } else if (state === 'error') {
@@ -119,7 +119,7 @@ export async function GET(request: NextRequest) {
         ),
         {
           width: 1200,
-          height: 630,
+          height: 1200,
         }
       );
     }
@@ -161,7 +161,7 @@ export async function GET(request: NextRequest) {
       ),
       {
         width: 1200,
-        height: 630,
+        height: 1200,
       }
     );
   } catch (error) {

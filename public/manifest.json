@@ -1,0 +1,36 @@
+{
+  "name": "TapRace",
+  "short_name": "TapRace",
+  "description": "Competitive tapping game on Base. Race against others to tap the most in 30 seconds. Winner takes all!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0052FF",
+  "theme_color": "#0052FF",
+  "icons": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x1200",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "frame": {
+    "version": "vNext",
+    "name": "TapRace",
+    "icon": "/og-image.png",
+    "image": "/api/frame/image",
+    "imageAspectRatio": "1:1",
+    "buttons": [
+      {
+        "label": "Start Game",
+        "action": "post"
+      },
+      {
+        "label": "Open Full App",
+        "action": "link",
+        "target": "/"
+      }
+    ],
+    "postUrl": "/api/frame"
+  }
+}

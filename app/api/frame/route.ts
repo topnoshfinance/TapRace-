@@ -15,34 +15,37 @@ export async function POST(request: NextRequest) {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 
     if (buttonIndex === 1) {
-      // Start game button pressed - redirect to app with wallet connection
+      // Start game button pressed - show playing state
       return NextResponse.json({
         version: 'vNext',
         image: `${baseUrl}/api/frame/image?state=playing`,
+        postUrl: `${baseUrl}/api/frame`,
         buttons: [
-          {
-            label: 'Connect Wallet & Play',
-            action: 'link',
-            target: `${baseUrl}`,
-          },
           {
             label: 'View Results',
             action: 'post',
           },
+          {
+            label: 'Open Full App',
+            action: 'link',
+            target: `${baseUrl}`,
+          },
         ],
       });
     } else if (buttonIndex === 2) {
-      // View results button pressed
+      // View results button pressed or coming from "Open Full App" shouldn't happen in POST
+      // This handles "View Results" from playing state
       return NextResponse.json({
         version: 'vNext',
         image: `${baseUrl}/api/frame/image?state=results`,
+        postUrl: `${baseUrl}/api/frame`,
         buttons: [
           {
             label: 'Play Again',
             action: 'post',
           },
           {
-            label: 'Open App',
+            label: 'Open Full App',
             action: 'link',
             target: baseUrl,
           },
@@ -50,14 +53,20 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Default response
+    // Default response - initial state or "Play Again"
     return NextResponse.json({
       version: 'vNext',
       image: `${baseUrl}/api/frame/image`,
+      postUrl: `${baseUrl}/api/frame`,
       buttons: [
         {
           label: 'Start Game',
           action: 'post',
+        },
+        {
+          label: 'Open Full App',
+          action: 'link',
+          target: baseUrl,
         },
       ],
     });
@@ -68,6 +77,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       version: 'vNext',
       image: `${baseUrl}/api/frame/image?state=error`,
+      postUrl: `${baseUrl}/api/frame`,
       buttons: [
         {
           label: 'Try Again',
@@ -84,10 +94,16 @@ export async function GET() {
   return NextResponse.json({
     version: 'vNext',
     image: `${baseUrl}/api/frame/image`,
+    postUrl: `${baseUrl}/api/frame`,
     buttons: [
       {
         label: 'Start Game',
         action: 'post',
+      },
+      {
+        label: 'Open Full App',
+        action: 'link',
+        target: baseUrl,
       },
     ],
   });
