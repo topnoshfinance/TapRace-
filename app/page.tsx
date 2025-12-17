@@ -6,6 +6,7 @@ import TapButton from '@/components/TapButton';
 import GameStats from '@/components/GameStats';
 import Leaderboard from '@/components/Leaderboard';
 import { isInFarcasterFrame } from '@/src/lib/frame-utils';
+import { checkTokenBalance } from '@/lib/token-gating';
 
 export default function Home() {
   const [gameState, setGameState] = useState<'idle' | 'playing' | 'finished'>('idle');
@@ -13,6 +14,8 @@ export default function Home() {
   const [timeLeft, setTimeLeft] = useState(30);
   const [totalPool, setTotalPool] = useState(0);
   const [hasToken, setHasToken] = useState(false);
+  const [tokenBalance, setTokenBalance] = useState('0');
+  const [checkingToken, setCheckingToken] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   
   const { isConnected, address } = useAccount();
@@ -35,28 +38,41 @@ export default function Home() {
     }
   }, [isConnected, connect, connectors]);
 
+  // TEMPORARY: Token gating with tangyyoghurt creator coin
+  // This checks the user's balance of the tangyyoghurt token
+  // TODO: Replace with $TAP token when ready (just update NEXT_PUBLIC_TOKEN_ADDRESS env var)
   useEffect(() => {
-    // Check if user has TapRace token (simplified for demo)
-    // In production, implement the following:
-    // 1. Check TAP token balance via token.balanceOf(userAddress)
-    // 2. Check token approval via token.allowance(userAddress, gameContractAddress)
-    // 3. If balance sufficient but approval insufficient, prompt user to approve
-    // 4. Then call gameContract.submitTaps() which will transfer tokens on-chain
     const checkTokenOwnership = async () => {
-      // In production, this would check actual token balance
-      // For now, we'll simulate token ownership if wallet is connected
-      if (isConnected && address) {
-        setHasToken(true);
-      } else {
+      if (!isConnected || !address) {
         setHasToken(false);
+        setTokenBalance('0');
+        return;
+      }
+
+      setCheckingToken(true);
+      try {
+        const result = await checkTokenBalance(address);
+        setHasToken(result.hasTokens);
+        setTokenBalance(result.balance);
+        
+        if (result.error) {
+          console.error('Token check error:', result.error);
+        }
+      } catch (error) {
+        console.error('Error checking token balance:', error);
+        setHasToken(false);
+        setTokenBalance('0');
+      } finally {
+        setCheckingToken(false);
       }
     };
+
     checkTokenOwnership();
   }, [isConnected, address]);
 
   const startGame = () => {
     if (!hasToken) {
-      alert('You need TapRace tokens to participate!');
+      alert('You need at least 100 tokens to participate!');
       return;
     }
     
@@ -149,23 +165,39 @@ export default function Home() {
                     🔄 Connecting your wallet...
                   </p>
                 </div>
+              ) : checkingToken ? (
+                <div className="bg-blue-100 border-2 border-blue-400 rounded-xl p-6">
+                  <p className="text-blue-800 font-semibold">
+                    🔍 Checking your token balance...
+                  </p>
+                </div>
               ) : hasToken ? (
-                <button
-                  onClick={startGame}
-                  className="bg-gradient-to-r from-base-blue to-farcaster-purple text-white px-12 py-4 rounded-full text-xl font-bold hover:shadow-lg transform hover:scale-105 transition-all"
-                >
-                  Start Game 🎮
-                </button>
+                <div>
+                  <div className="bg-green-100 border-2 border-green-400 rounded-xl p-4 mb-4">
+                    <p className="text-green-800 font-semibold">
+                      ✅ Token Balance: {parseFloat(tokenBalance).toFixed(2)} tokens
+                    </p>
+                  </div>
+                  <button
+                    onClick={startGame}
+                    className="bg-gradient-to-r from-base-blue to-farcaster-purple text-white px-12 py-4 rounded-full text-xl font-bold hover:shadow-lg transform hover:scale-105 transition-all"
+                  >
+                    Start Game 🎮
+                  </button>
+                </div>
               ) : (
                 <div className="bg-yellow-100 border-2 border-yellow-400 rounded-xl p-6">
-                  <p className="text-yellow-800 font-semibold mb-4">
-                    🪙 You need TapRace tokens to play!
+                  <p className="text-yellow-800 font-semibold mb-2">
+                    🪙 Insufficient Token Balance
+                  </p>
+                  <p className="text-yellow-700 mb-4">
+                    You have {parseFloat(tokenBalance).toFixed(2)} tokens. You need at least 100 tokens to play!
                   </p>
                   <button
                     className="bg-yellow-500 text-white px-8 py-3 rounded-full font-bold hover:bg-yellow-600 transition-colors"
                     onClick={() => alert('Token purchase flow would be implemented here')}
                   >
-                    Get TapRace Tokens
+                    Get More Tokens
                   </button>
                 </div>
               )}
