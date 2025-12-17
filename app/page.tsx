@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useAccount, useConnect } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import TapButton from '@/components/TapButton';
 import GameStats from '@/components/GameStats';
 import Leaderboard from '@/components/Leaderboard';
@@ -122,9 +121,6 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-base-blue to-farcaster-purple p-4">
       <div className="max-w-4xl mx-auto">
         <header className="text-center py-8">
-          <div className="flex justify-end mb-4">
-            <ConnectButton />
-          </div>
           <h1 className="text-5xl font-bold text-white mb-2">
             ⚡ TapRace ⚡
           </h1>
@@ -149,10 +145,9 @@ export default function Home() {
               </p>
               {!isConnected ? (
                 <div className="bg-blue-100 border-2 border-blue-400 rounded-xl p-6">
-                  <p className="text-blue-800 font-semibold mb-4">
-                    🔗 Connect your wallet to start playing!
+                  <p className="text-blue-800 font-semibold">
+                    🔄 Connecting your wallet...
                   </p>
-                  <ConnectButton />
                 </div>
               ) : hasToken ? (
                 <button
