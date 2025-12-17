@@ -5,6 +5,7 @@ import { useAccount, useConnect } from 'wagmi';
 import TapButton from '@/components/TapButton';
 import GameStats from '@/components/GameStats';
 import Leaderboard from '@/components/Leaderboard';
+import AddToFarcasterPrompt from '@/components/AddToFarcasterPrompt';
 import { isInFarcasterFrame } from '@/src/lib/frame-utils';
 import { checkTokenBalance } from '@/lib/token-gating';
 
@@ -135,6 +136,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-base-blue to-farcaster-purple p-4">
+      <AddToFarcasterPrompt />
       <div className="max-w-4xl mx-auto">
         <header className="text-center py-8">
           <h1 className="text-5xl font-bold text-white mb-2">
