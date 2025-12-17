@@ -26,19 +26,25 @@ export default function AddToFarcasterPrompt() {
   }, []);
 
   const handleAddToApps = () => {
-    // Try to use Farcaster SDK if available
+    // TODO: Integrate with Farcaster SDK when available
+    // The Farcaster SDK would provide a programmatic way to add apps to user's collection
+    // Current implementation: Show instructions for manual addition
     if (typeof window !== 'undefined') {
       try {
-        // Call Farcaster SDK method to add to apps
-        // This is placeholder - actual implementation depends on Farcaster SDK
         const farcasterSDK = (window as { farcaster?: { addToApps?: () => void } }).farcaster;
-        farcasterSDK?.addToApps?.();
+        if (farcasterSDK?.addToApps) {
+          // If SDK is available, use it to add the app programmatically
+          farcasterSDK.addToApps();
+          handleDismiss();
+          return;
+        }
       } catch (error) {
         console.error('Error adding to Farcaster apps:', error);
       }
     }
     
-    // For now, provide instructions or open relevant page
+    // Fallback: Show instructions for manual addition
+    // Note: Using native alert for simplicity. Consider replacing with a custom modal in future iterations.
     alert('To add TapRace to your Farcaster apps:\n\n1. Open TapRace in Farcaster/Warpcast\n2. Tap the menu (⋯)\n3. Select "Add to Home Screen" or "Add to Apps"\n\nThis will give you quick access to TapRace anytime!');
     
     handleDismiss();
