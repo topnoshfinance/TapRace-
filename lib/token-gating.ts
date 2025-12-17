@@ -51,8 +51,13 @@ export async function checkTokenBalance(address: `0x${string}` | undefined) {
       functionName: 'decimals',
     });
 
+    // Type guard: Ensure balance is a bigint and decimals is a number
+    if (typeof balance !== 'bigint' || typeof decimals !== 'number') {
+      throw new Error('Invalid response from token contract');
+    }
+
     // Convert balance to human-readable format
-    const formattedBalance = formatUnits(balance as bigint, decimals as number);
+    const formattedBalance = formatUnits(balance, decimals);
     const balanceNumber = parseFloat(formattedBalance);
 
     // Check if balance meets minimum requirement
@@ -102,10 +107,15 @@ export async function getTokenInfo() {
       }),
     ]);
 
+    // Type guards: Ensure correct types
+    if (typeof name !== 'string' || typeof symbol !== 'string' || typeof decimals !== 'number') {
+      throw new Error('Invalid response from token contract');
+    }
+
     return {
-      name: name as string,
-      symbol: symbol as string,
-      decimals: decimals as number,
+      name,
+      symbol,
+      decimals,
     };
   } catch (error) {
     console.error('Error getting token info:', error);
