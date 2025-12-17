@@ -4,18 +4,19 @@ import { Web3Provider } from '@/src/components/Web3Provider';
 
 export const metadata: Metadata = {
   title: 'TapRace - Competitive Tapping on Base',
-  description: 'Race to tap the most in 30 seconds! Winner takes the prize pool. Built on Base with Farcaster Frames.',
+  description: 'Race against others to tap the most in 30 seconds. Winner takes all!',
   openGraph: {
     title: 'TapRace - Competitive Tapping on Base',
-    description: 'Race to tap the most in 30 seconds! Winner takes the prize pool.',
-    images: ['/og-image.svg'],
+    description: 'Race against others to tap the most in 30 seconds. Winner takes all!',
+    images: [`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/og-image.png`],
   },
   other: {
     'fc:frame': 'vNext',
-    'fc:frame:image': `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/frame/image`,
-    'fc:frame:button:1': 'Start Game',
-    'fc:frame:button:1:action': 'post',
-    'fc:frame:post_url': `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/frame`,
+    'fc:frame:image': `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/og-image.png`,
+    'fc:frame:image:aspect_ratio': '1:1',
+    'fc:frame:button:1': 'Play TapRace',
+    'fc:frame:button:1:action': 'link',
+    'fc:frame:button:1:target': process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
   },
 };
 
