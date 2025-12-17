@@ -15,5 +15,8 @@ export const CHAIN_CONFIG = {
 
 export const CONTRACT_ADDRESSES = {
   game: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || '',
-  token: process.env.NEXT_PUBLIC_TOKEN_ADDRESS || '',
+  // TEMPORARY: Using tangyyoghurt creator coin for testing token gating
+  // TODO: Replace with $TAP token address when ready
+  // tangyyoghurt creator coin: 0x293b4308f55f7b9bdbea937bfe9c3ee50136e3b9
+  token: process.env.NEXT_PUBLIC_TOKEN_ADDRESS || '0x293b4308f55f7b9bdbea937bfe9c3ee50136e3b9',
 };
