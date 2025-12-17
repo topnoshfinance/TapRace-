@@ -11,7 +11,7 @@ export const config = createConfig({
       preference: 'smartWalletOnly', // Prioritize Smart Wallet
     }),
     
-    // Injected wallets (Farcaster wallet, MetaMask, etc.)
+    // Injected wallets (Farcaster mobile browser, MetaMask, etc.)
     injected(),
   ],
   transports: {
