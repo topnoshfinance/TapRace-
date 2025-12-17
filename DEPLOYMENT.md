@@ -154,12 +154,14 @@ git push origin main
 4. Update DNS records as instructed
 5. Update `NEXT_PUBLIC_BASE_URL` in environment variables
 
-## Step 4: Test Farcaster Frame
+## Step 4: Test Farcaster Mini App
 
-1. Once deployed, your Frame will be available at your deployment URL
-2. Create a test cast on Warpcast with your URL
-3. Test the Frame buttons and interactions
-4. Use [Frame Validator](https://warpcast.com/~/developers/frames) to debug
+1. Once deployed, your Mini App will be available at your deployment URL
+2. Verify manifest is accessible at `https://your-url.com/.well-known/farcaster.json`
+3. Create a test cast on Warpcast with your URL
+4. Test the Mini App embed and wallet integration
+5. Use [Warpcast Frame Validator](https://warpcast.com/~/developers/frames) to debug
+6. Verify `sdk.actions.ready()` is called on app load
 
 Example cast:
 ```
@@ -168,6 +170,12 @@ Competitive tapping on Base - tap fast, win big! 🏆
 
 https://your-deployment-url.vercel.app
 ```
+
+### Mini App Requirements
+- Manifest file at `/.well-known/farcaster.json` with proper metadata
+- Meta tags using `fc:miniapp:*` format in layout.tsx
+- SDK initialization with `@farcaster/miniapp-sdk`
+- Call to `sdk.actions.ready()` after app initialization
 
 ## Step 5: Verify Contracts on BaseScan
 
@@ -236,10 +244,13 @@ cast send <TOKEN_ADDRESS> "approve(address,uint256)" <GAME_CONTRACT_ADDRESS> <AM
 - Check Base network status
 
 ### Frame not showing in Farcaster
-- Verify meta tags in layout.tsx
+- Verify meta tags use `fc:miniapp:*` format in layout.tsx
+- Check manifest file is accessible at `/.well-known/farcaster.json`
+- Ensure manifest has correct content type headers
 - Check image URLs are publicly accessible
 - Use Frame Validator to debug
 - Ensure NEXT_PUBLIC_BASE_URL is correct
+- Verify `sdk.actions.ready()` is being called
 
 ### Transactions failing
 - Check gas limits

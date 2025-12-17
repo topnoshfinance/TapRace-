@@ -110,15 +110,16 @@ TapRace-/
 6. **Winner Takes All**: Player with the most cumulative taps in the 5-minute round wins the entire prize pool
 7. **Claim Prize**: Winners can withdraw their prize from the contract
 
-## 🖼️ Farcaster Frame Integration
+## 🖼️ Farcaster Mini App Integration
 
-TapRace is fully integrated with Farcaster Frames, allowing users to play directly from their Farcaster feed:
+TapRace is fully integrated with Farcaster Mini Apps, allowing users to play directly from their Farcaster feed:
 
-1. Frame displays game status and current round info
-2. "Start Game" button launches the game
-3. Players can tap directly in the frame
-4. Results are displayed in-frame
-5. Link to full app for detailed leaderboard
+1. Uses Farcaster Mini Apps 2025 standards with manifest file
+2. Implements `@farcaster/miniapp-sdk` for proper initialization
+3. Supports wallet integration via Farcaster providers
+4. Signal app readiness with `sdk.actions.ready()`
+5. Embeds seamlessly in Warpcast and other Farcaster clients
+6. Link to full app for detailed leaderboard
 
 ## 🔗 Base Network Integration
 
@@ -176,9 +177,11 @@ forge create --rpc-url $BASE_RPC_URL --private-key $PRIVATE_KEY contracts/TapRac
 ## 📱 Testing on Farcaster
 
 1. Deploy your app to a public URL
-2. Create a cast with your frame URL
-3. Test the frame buttons and interactions
-4. Use Warpcast's Frame Validator for debugging
+2. Ensure manifest is accessible at `https://your-url.com/.well-known/farcaster.json`
+3. Create a cast with your app URL
+4. Test the Mini App embed in Warpcast
+5. Use [Warpcast Frame Validator](https://warpcast.com/~/developers/frames) for debugging
+6. Verify that `sdk.actions.ready()` is called on app load
 
 ## 🤝 Contributing
 
@@ -196,7 +199,8 @@ MIT License - see LICENSE file for details
 
 - [Base Network](https://base.org)
 - [Farcaster](https://farcaster.xyz)
-- [Farcaster Frames Documentation](https://docs.farcaster.xyz/learn/what-is-farcaster/frames)
+- [Farcaster Mini Apps Documentation](https://miniapps.farcaster.xyz)
+- [Manifest vs Embed Guide](https://miniapps.farcaster.xyz/docs/guides/manifest-vs-embed)
 
 ## 💡 Future Enhancements
 

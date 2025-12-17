@@ -8,6 +8,7 @@ import Leaderboard from '@/components/Leaderboard';
 import AddToFarcasterPrompt from '@/components/AddToFarcasterPrompt';
 import { isInFarcasterFrame } from '@/src/lib/frame-utils';
 import { checkTokenBalance } from '@/lib/token-gating';
+import { sdk } from '@farcaster/miniapp-sdk';
 
 export default function Home() {
   const [gameState, setGameState] = useState<'idle' | 'playing' | 'finished'>('idle');
@@ -24,6 +25,23 @@ export default function Home() {
 
   const TAP_COST = 1; // 1 TAP token per tap
   const GAME_DURATION = 30; // 30 seconds
+
+  // Initialize Farcaster Mini App SDK
+  useEffect(() => {
+    const initSDK = async () => {
+      try {
+        const context = await sdk.context;
+        if (context) {
+          // Signal that the app is ready
+          await sdk.actions.ready();
+        }
+      } catch {
+        console.log('Not running in Farcaster Mini App context');
+      }
+    };
+
+    initSDK();
+  }, []);
 
   // Auto-connect in Farcaster frames
   useEffect(() => {
