@@ -262,12 +262,11 @@ cast send <TOKEN_ADDRESS> "approve(address,uint256)" <GAME_CONTRACT_ADDRESS> <AM
 ## Next Steps
 
 1. Add database for persistent storage (PostgreSQL, Supabase)
-2. Implement real wallet connection (RainbowKit)
-3. Add social features (sharing, invites)
-4. Create admin dashboard
-5. Implement anti-cheat measures
-6. Add analytics and metrics
-7. Launch marketing campaign
+2. Add social features (sharing, invites)
+3. Create admin dashboard
+4. Implement anti-cheat measures
+5. Add analytics and metrics
+6. Launch marketing campaign
 
 ## Support
 

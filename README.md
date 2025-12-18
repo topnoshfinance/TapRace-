@@ -18,7 +18,6 @@ TapRace is a social race mini app for Farcaster and Base where players compete t
 
 - ✅ **Coinbase Smart Wallet** (recommended for Base app users)
 - ✅ **Farcaster Wallet** (via injected provider)
-- ✅ **MetaMask**
 - ✅ **Any injected wallet provider**
 
 ## 🚀 Quick Start

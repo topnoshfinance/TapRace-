@@ -109,7 +109,7 @@ npm start
 - **wagmi**: Ethereum library for React
 - **viem**: TypeScript library for Ethereum
 - **Next.js**: React framework
-- **RainbowKit**: Wallet connection UI
+- **Coinbase Wallet SDK**: Wallet connection
 
 ### Token Standard
 - ERC20 compliant token
