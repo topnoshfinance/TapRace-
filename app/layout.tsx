@@ -13,11 +13,12 @@ export const metadata: Metadata = {
     images: [`${baseUrl}/og-image.png`],
   },
   other: {
-    'fc:frame': 'vNext',
-    'fc:frame:image': `${baseUrl}/og-image.png`,
-    'fc:frame:button:1': 'Play Now',
-    'fc:frame:button:1:action': 'link',
-    'fc:frame:button:1:target': baseUrl,
+    // Mini App meta tags (2025 format)
+    'fc:miniapp': 'true',
+    'fc:miniapp:manifest': `${baseUrl}/.well-known/farcaster.json`,
+    'fc:miniapp:name': 'TapRace',
+    'fc:miniapp:icon': `${baseUrl}/icon.png`,
+    'fc:miniapp:image': `${baseUrl}/og-image.png`,
   },
 };
 
