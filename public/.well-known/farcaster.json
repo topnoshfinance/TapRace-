@@ -1,18 +1,18 @@
 {
   "accountAssociation": {
-    "header": "eyJmaWQiOjEsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHhGRDdBQjAzN0ExZTk0NzJENUY3M0MyNkI5RDBCRjg2RDMyRDQ1NkM4In0",
+    "header": "eyJmaWQiOjg5OTg2NSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDk0MDBjQWIyNDAwMzdEQjA2ODQ0QzQ3YkJBQjIyOEZEY2NCMkMyQkQifQ",
     "payload": "eyJkb21haW4iOiJ0YXAtcmFjZS52ZXJjZWwuYXBwIn0",
-    "signature": "MHhiZTI5ODdhNGRhNTQ3ZDM0OGEyZTQxYmYwYjk0N2Q1YTlhNDMxZTVmZTU5YzFmNTFjNTEyZDQzMWFhYmRhNjM4MWIxNjIyNDhkNjYzMmJhMzUyYzg0ZjRjMjI1YzBjZTAyNWY0NWZhZTcwYTFjOGJmYjE0YjYyYmVhYzFmZWYzYjFi"
+    "signature": "BTui3P+AylQC0dYn2u1fMwRCpsyXJ6pkti6L3DzS+A4lKPLtAF5+43o8LMriiv0DOS/ZGNOnWuM/9Z95hRvwvxw="
   },
   "frame": {
-    "version": "next",
-    "name": "TapRace",
-    "iconUrl": "https://tap-race.vercel.app/og-image.png",
+    "version": "1",
+    "name": "Example Frame",
+    "iconUrl": "https://tap-race.vercel.app/icon.png",
     "homeUrl": "https://tap-race.vercel.app",
-    "imageUrl": "https://tap-race.vercel.app/og-image.png",
-    "buttonTitle": "Play TapRace",
-    "splashImageUrl": "https://tap-race.vercel.app/og-image.png",
-    "splashBackgroundColor": "#0052FF",
+    "imageUrl": "https://tap-race.vercel.app/image.png",
+    "buttonTitle": "Check this out",
+    "splashImageUrl": "https://tap-race.vercel.app/splash.png",
+    "splashBackgroundColor": "#eeccff",
     "webhookUrl": "https://tap-race.vercel.app/api/webhook"
   }
 }
