@@ -4,15 +4,15 @@
     "payload": "eyJkb21haW4iOiJ0YXAtcmFjZS52ZXJjZWwuYXBwIn0",
     "signature": "BTui3P+AylQC0dYn2u1fMwRCpsyXJ6pkti6L3DzS+A4lKPLtAF5+43o8LMriiv0DOS/ZGNOnWuM/9Z95hRvwvxw="
   },
-  "frame": {
-    "version": "1",
-    "name": "Example Frame",
+  "miniapp": {
+    "version": "next",
+    "name": "TapRace",
+    "description": "Competitive tapping game on Base - tap fast, win big!",
     "iconUrl": "https://tap-race.vercel.app/icon.png",
     "homeUrl": "https://tap-race.vercel.app",
-    "imageUrl": "https://tap-race.vercel.app/image.png",
-    "buttonTitle": "Check this out",
+    "imageUrl": "https://tap-race.vercel.app/og-image.png",
     "splashImageUrl": "https://tap-race.vercel.app/splash.png",
-    "splashBackgroundColor": "#eeccff",
+    "splashBackgroundColor": "#0052FF",
     "webhookUrl": "https://tap-race.vercel.app/api/webhook"
   }
 }
