@@ -5,7 +5,7 @@
     "signature": "BTui3P+AylQC0dYn2u1fMwRCpsyXJ6pkti6L3DzS+A4lKPLtAF5+43o8LMriiv0DOS/ZGNOnWuM/9Z95hRvwvxw="
   },
   "miniapp": {
-    "version": "next",
+    "version": "1",
     "name": "TapRace",
     "description": "Competitive tapping game on Base - tap fast, win big!",
     "iconUrl": "https://tap-race.vercel.app/icon.png",
