@@ -1,8 +1,18 @@
 {
-  "name": "TapRace",
-  "iconUrl": "https://tap-race.vercel.app/og-image.png",
-  "homeUrl": "https://tap-race.vercel.app",
-  "description": "Race against others to tap the most in 30 seconds. Winner takes all!",
-  "requiredCapabilities": ["wallet.getEvmProvider", "actions.ready"],
-  "requiredChains": ["ethereum", "base"]
+  "accountAssociation": {
+    "header": "eyJmaWQiOjg5OTg2NSwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDk0MDBjQWIyNDAwMzdEQjA2ODQ0QzQ3YkJBQjIyOEZEY2NCMkMyQkQifQ",
+    "payload": "eyJkb21haW4iOiJ0YXAtcmFjZS52ZXJjZWwuYXBwIn0",
+    "signature": "BTui3P+AylQC0dYn2u1fMwRCpsyXJ6pkti6L3DzS+A4lKPLtAF5+43o8LMriiv0DOS/ZGNOnWuM/9Z95hRvwvxw="
+  },
+  "frame": {
+    "version": "1",
+    "name": "Example Frame",
+    "iconUrl": "https://tap-race.vercel.app/icon.png",
+    "homeUrl": "https://tap-race.vercel.app",
+    "imageUrl": "https://tap-race.vercel.app/image.png",
+    "buttonTitle": "Check this out",
+    "splashImageUrl": "https://tap-race.vercel.app/splash.png",
+    "splashBackgroundColor": "#eeccff",
+    "webhookUrl": "https://tap-race.vercel.app/api/webhook"
+  }
 }

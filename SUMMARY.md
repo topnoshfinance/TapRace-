@@ -190,9 +190,8 @@ TapRace-/
 ### Phase 1: Core Functionality
 1. Deploy smart contracts to Base testnet
 2. Test contract interactions
-3. Implement wallet connection (RainbowKit)
-4. Add Frame signature verification
-5. Set up database (PostgreSQL/Supabase)
+3. Add Frame signature verification
+4. Set up database (PostgreSQL/Supabase)
 
 ### Phase 2: Security & Performance
 6. Get smart contract audit
@@ -252,7 +251,6 @@ Ensure Frame works across:
 - **Farcaster**: https://farcaster.xyz
 - **Frame Docs**: https://docs.farcaster.xyz/learn/what-is-farcaster/frames
 - **Next.js**: https://nextjs.org
-- **RainbowKit**: https://rainbowkit.com
 - **OpenZeppelin**: https://openzeppelin.com
 
 ## Success Metrics

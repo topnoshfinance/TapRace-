@@ -10,13 +10,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'TapRace - Competitive Tapping on Base',
     description: 'Race against others to tap the most in 30 seconds. Winner takes all!',
-    images: [`${baseUrl}/api/frame/image`],
+    images: [`${baseUrl}/og-image.png`],
   },
   other: {
-    // Farcaster Mini App embed metadata (NEW FORMAT)
-    'fc:miniapp:title': 'TapRace',
-    'fc:miniapp:icon': `${baseUrl}/og-image.png`,
-    'fc:miniapp:url': baseUrl,
+    'fc:frame': 'vNext',
+    'fc:frame:image': `${baseUrl}/og-image.png`,
+    'fc:frame:button:1': 'Play Now',
+    'fc:frame:button:1:action': 'link',
+    'fc:frame:button:1:target': baseUrl,
   },
 };
 
